@@ -1,0 +1,876 @@
+{
+	"info": {
+		"_postman_id": "5bcbc804-3416-4838-bec0-3cb57c301555",
+		"name": "Mosnad",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11628345",
+		"_collection_link": "https://www.postman.com/planetary-satellite-766913/workspace/mosnad/collection/11628345-5bcbc804-3416-4838-bec0-3cb57c301555?action=share&source=collection_link&creator=11628345"
+	},
+	"item": [
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "csrf-cookie",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									"pm.sendRequest({",
+									"    url: pm.collectionVariables.get('base_url')+'/sanctum/csrf-cookie',",
+									"    method: 'GET'",
+									"}, function (error, response, {cookies}) {",
+									"    if (!error){",
+									"        pm.collectionVariables.set('xsrf-cookie', cookies.get('XSRF-TOKEN'))",
+									"    }",
+									"})"
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/sanctum/csrf-cookie",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"sanctum",
+								"csrf-cookie"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Register",
+					"protocolProfileBehavior": {
+						"disabledSystemHeaders": {}
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"type": "text",
+								"value": "{{xsrf-cookie}}"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "admin",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "admin@admin.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								},
+								{
+									"key": "password_confirmation",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/register",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"value": "{{xsrf-cookie}}",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "admin@admin.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/login",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Logout",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							},
+							{
+								"key": "X-XSRF-TOKEN",
+								"type": "text",
+								"value": "{{xsrf-cookie}}"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/logout",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/user",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/users",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "test1",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "test1@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users/{id}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Test",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "ali@gmail.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "password",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Users/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/api/users/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Books",
+			"item": [
+				{
+					"name": "Books",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/books",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Books",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": "The 1-Page Marketing Plan",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "To build a successful business, you need to stop doing random acts of marketing and start following a reliable plan for rapid business growth. Traditionally, creating a marketing plan has been a difficult and time-consuming process, which is why it often doesn't get done.",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "first roof number 1",
+									"type": "text"
+								},
+								{
+									"key": "author",
+									"value": "Allan Dib",
+									"type": "text"
+								},
+								{
+									"key": "year",
+									"value": "2016",
+									"type": "text"
+								},
+								{
+									"key": "isbn",
+									"value": "9781733301206",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/books/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Books/{id}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/api/books/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Books/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "The 1-Page Marketing Plan",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "To build a successful business, you need to stop doing random acts of marketing and start following a reliable plan for rapid business growth. Traditionally, creating a marketing plan has been a difficult and time-consuming process, which is why it often doesn't get done.",
+									"type": "text"
+								},
+								{
+									"key": "address",
+									"value": "first roof number 1",
+									"type": "text"
+								},
+								{
+									"key": "author",
+									"value": "Allan Dib",
+									"type": "text"
+								},
+								{
+									"key": "year",
+									"value": "2016",
+									"type": "text"
+								},
+								{
+									"key": "isbn",
+									"value": "9781733301206",
+									"type": "text"
+								},
+								{
+									"key": "status",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/books/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Books/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/api/books/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"books",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Loans",
+			"item": [
+				{
+					"name": "Loans",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/api/loans",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"loans"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Loans",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "user_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "book_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "loan_date",
+									"value": "2024-05-20 16:20:41",
+									"type": "text"
+								},
+								{
+									"key": "return_date",
+									"value": "2024-06-15 16:20:41",
+									"type": "text"
+								},
+								{
+									"key": "loan_status",
+									"value": "1",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/loans/",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Loans/{id}",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url}}/api/loans/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Loans/{id}",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "user_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "book_id",
+									"value": "2",
+									"type": "text"
+								},
+								{
+									"key": "loan_date",
+									"value": "2024-05-20 16:20:41",
+									"type": "text"
+								},
+								{
+									"key": "return_date",
+									"value": "2024-06-15 16:20:41",
+									"type": "text"
+								},
+								{
+									"key": "loan_status",
+									"value": "0",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url}}/api/loans/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Loans/{id}",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{base_url}}/api/loans/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"api",
+								"loans",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					"pm.sendRequest({",
+					"    url: pm.collectionVariables.get('base_url')+'/sanctum/csrf-cookie',",
+					"    method: 'GET'",
+					"}, function (error, response, {cookies}) {",
+					"    if (!error){",
+					"        pm.collectionVariables.set('xsrf-cookie', cookies.get('XSRF-TOKEN'))",
+					"    }",
+					"})",
+					"",
+					"const jar = pm.cookies.jar();",
+					"",
+					"jar.get(pm.collectionVariables.get('host') , \"XSRF-TOKEN\" ,(err ,cookies)=>{",
+					"\tpm.request.addHeader({",
+					"\t\tkey: \"X-XSRF-TOKEN\",",
+					"\t\tvalue: pm.collectionVariables.get('xsrf-cookie')",
+					"\t});",
+					"",
+					"\tpm.request.addHeader({",
+					"\t\tkey: \"Referer\",",
+					"\t\tvalue: pm.collectionVariables.get('host')",
+					"\t});",
+					"})",
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://127.0.0.1:8000",
+			"type": "string"
+		},
+		{
+			"key": "host",
+			"value": "http://localhost:3000",
+			"type": "string"
+		},
+		{
+			"key": "xsrf-cookie",
+			"value": ""
+		}
+	]
+}

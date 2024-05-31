@@ -34,13 +34,18 @@ class BookController extends Controller
      */
     public function store(StoreBookRequest $request)
     {
-        $details =[
+        $deatils = [
             'name' => $request->name,
-            'details' => $request->details
+            'description' =>$request->description,
+            'address' =>$request->address,
+            'author' =>$request->author,
+            'year' =>$request->year,
+            'isbn' =>$request->isbn,
+            'status' =>$request->status,
         ];
         DB::beginTransaction();
         try{
-             $Book = BookRepository::store($details);
+             $Book = BookRepository::store($deatils);
 
              DB::commit();
              return ApiResponseClass::sendResponse(new BookResource($Book),'Book Create Successful',201);
@@ -73,13 +78,18 @@ class BookController extends Controller
      */
     public function update(UpdateBookRequest $request, $id)
     {
-        $updateDetails =[
+        $deatils = [
             'name' => $request->name,
-            'details' => $request->details
+            'description' =>$request->description,
+            'address' =>$request->address,
+            'author' =>$request->author,
+            'year' =>$request->year,
+            'isbn' =>$request->isbn,
+            'status' =>$request->status,
         ];
         DB::beginTransaction();
         try{
-             $Book = BookRepository::update($updateDetails,$id);
+             $Book = BookRepository::update($deatils,$id);
 
              DB::commit();
              return ApiResponseClass::sendResponse('Book Update Successful','',201);

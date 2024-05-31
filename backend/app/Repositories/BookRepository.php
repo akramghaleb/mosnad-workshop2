@@ -14,11 +14,11 @@ class BookRepository implements RepositoryInterface
        return Book::findOrFail($id);
     }
 
-    public static function store(array $data){
+    public static function store($data){
        return Book::create($data);
     }
 
-    public static function update(array $data,$id){
+    public static function update($data,$id){
        return Book::whereId($id)->update($data);
     }
 

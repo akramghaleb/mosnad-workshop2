@@ -34,13 +34,9 @@ class UserController extends Controller
      */
     public function store(StoreUserRequest $request)
     {
-        $details =[
-            'name' => $request->name,
-            'details' => $request->details
-        ];
         DB::beginTransaction();
         try{
-             $User = UserRepository::store($details);
+             $User = UserRepository::store($request);
 
              DB::commit();
              return ApiResponseClass::sendResponse(new UserResource($User),'User Create Successful',201);
@@ -73,13 +69,9 @@ class UserController extends Controller
      */
     public function update(UpdateUserRequest $request, $id)
     {
-        $updateDetails =[
-            'name' => $request->name,
-            'details' => $request->details
-        ];
         DB::beginTransaction();
         try{
-             $User = UserRepository::update($updateDetails,$id);
+             $User = UserRepository::update($request,$id);
 
              DB::commit();
              return ApiResponseClass::sendResponse('User Update Successful','',201);

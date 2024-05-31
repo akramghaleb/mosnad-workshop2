@@ -35,8 +35,11 @@ class LoanController extends Controller
     public function store(StoreLoanRequest $request)
     {
         $details =[
-            'name' => $request->name,
-            'details' => $request->details
+            'user_id' => $request->user_id,
+            'book_id' =>$request->book_id,
+            'loan_date' =>$request->loan_date,
+            'return_date' =>$request->return_date,
+            'loan_status' =>$request->loan_status,
         ];
         DB::beginTransaction();
         try{
@@ -73,13 +76,16 @@ class LoanController extends Controller
      */
     public function update(UpdateLoanRequest $request, $id)
     {
-        $updateDetails =[
-            'name' => $request->name,
-            'details' => $request->details
+        $details =[
+            'user_id' => $request->user_id,
+            'book_id' =>$request->book_id,
+            'loan_date' =>$request->loan_date,
+            'return_date' =>$request->return_date,
+            'loan_status' =>$request->loan_status,
         ];
         DB::beginTransaction();
         try{
-             $Loan = LoanRepository::update($updateDetails,$id);
+             $Loan = LoanRepository::update($details,$id);
 
              DB::commit();
              return ApiResponseClass::sendResponse('Loan Update Successful','',201);
